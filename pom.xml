@@ -13,6 +13,7 @@
         <module>loans</module>
         <module>cards</module>
         <module>configserver</module>
+        <module>eurekaserver</module>
     </modules>
 
 </project>
