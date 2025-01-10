@@ -13,7 +13,7 @@ import java.util.Map;
 public class AccountsContactInfoDto {
 
     private String message;
-    private Map<String,String> contactDetails;
+    private Map<String, String> contactDetails;
     private List<String> onCallSupport;
 
 }

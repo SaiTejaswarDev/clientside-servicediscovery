@@ -2,7 +2,7 @@ package com.saitejaswar.accounts.controller;
 
 import com.saitejaswar.accounts.dto.CustomerDetailsDto;
 import com.saitejaswar.accounts.dto.ErrorResponseDto;
-import com.saitejaswar.accounts.service.ICustomerService;
+import com.saitejaswar.accounts.service.ICustomersService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -18,21 +18,21 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-@RestController
-@RequestMapping(path = "/api",produces = {MediaType.APPLICATION_JSON_VALUE})
-@Validated
 @Tag(
-        name = "CRUD REST APIs for Customers in Eazy Bank",
-        description = "REST APIS in EazyBank to fetch customer details"
+        name = "REST API for Customers in EazyBank",
+        description = "REST APIs in EazyBank to FETCH customer details"
 )
+@RestController
+@RequestMapping(path="/api", produces = {MediaType.APPLICATION_JSON_VALUE})
+@Validated
 public class CustomerController {
 
     private static final Logger logger = LoggerFactory.getLogger(CustomerController.class);
 
-    private final ICustomerService iCustomerService;
+    private final ICustomersService iCustomersService;
 
-    public CustomerController(ICustomerService iCustomerService) {
-        this.iCustomerService = iCustomerService;
+    public CustomerController(ICustomersService iCustomersService){
+        this.iCustomersService = iCustomersService;
     }
 
     @Operation(
@@ -54,16 +54,16 @@ public class CustomerController {
     }
     )
     @GetMapping("/fetchCustomerDetails")
-    public ResponseEntity<CustomerDetailsDto> fetchCustomerDetails(
-            @RequestHeader("eazybank-correlation-id")
-            String correlationId,
-            @RequestParam
-           @Pattern(regexp = "(^$|[0-9]{10})", message = "Mobile number must be 10 digits")
-           String mobileNumber) {
-        logger.debug("eazybank-correlation-id found : {}", correlationId);
-        CustomerDetailsDto customerDetailsDto= iCustomerService.fetchCustomerDetails(mobileNumber,correlationId);
-        return ResponseEntity.status(HttpStatus.SC_OK)
-                .body(customerDetailsDto);
+    public ResponseEntity<CustomerDetailsDto> fetchCustomerDetails(@RequestHeader("eazybank-correlation-id")
+                                                                       String correlationId,
+                                                                    @RequestParam @Pattern(regexp="(^$|[0-9]{10})",
+                                                                            message = "Mobile number must be 10 digits")
+                                                                   String mobileNumber) {
+        logger.debug("eazyBank-correlation-id found: {} ", correlationId);
+        CustomerDetailsDto customerDetailsDto = iCustomersService.fetchCustomerDetails(mobileNumber, correlationId);
+        return ResponseEntity.status(HttpStatus.SC_OK).body(customerDetailsDto);
+
     }
+
 
 }

@@ -4,32 +4,32 @@ import com.saitejaswar.accounts.dto.CustomerDto;
 
 public interface IAccountsService {
 
-
     /**
      *
-     * @param customerDto - CustomerDtoObject
+     * @param customerDto - CustomerDto Object
      */
     void createAccount(CustomerDto customerDto);
 
     /**
      *
-     * @param mobileNumber to search for a contact
-     * @return the Customer details with that mobile number
+     * @param mobileNumber - Input Mobile Number
+     * @return Accounts Details based on a given mobileNumber
      */
     CustomerDto fetchAccount(String mobileNumber);
 
     /**
      *
      * @param customerDto - CustomerDto Object
-     * @return boolean indicating if the Account Details are successfully updated
+     * @return boolean indicating if the update of Account details is successful or not
      */
     boolean updateAccount(CustomerDto customerDto);
 
     /**
      *
-     * @param mobileNumber
-     * @return
+     * @param mobileNumber - Input Mobile Number
+     * @return boolean indicating if the delete of Account details is successful or not
      */
     boolean deleteAccount(String mobileNumber);
+
 
 }
